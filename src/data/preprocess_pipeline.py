@@ -1,6 +1,12 @@
 """
 Full preprocessing pipeline to generate processed data: load -- clean -- aggregate -- save
 """
+import sys
+from pathlib import Path
+
+# Add src/data to path
+sys.path.insert(0, str(Path(__file__).parent))
+
 from load_data import load_raw_data
 from clean_data import clean_data
 from aggregate_data import aggregate_hourly, save_processed

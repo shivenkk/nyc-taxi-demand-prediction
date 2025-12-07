@@ -9,11 +9,14 @@ def aggregate_hourly(df: pd.DataFrame) -> pd.DataFrame:
     - pickup_count: number of pickups (TARGET)
     - avg_fare: average fare for that zone-hour
     - avg_distance: average trip distance for that zone-hour
+    
+    Fills in missing zone-hour combinations with zero pickups (valid zeros, not missing data).
+
     """
     # Extract hour
     df = df.copy()
     df['pickup_hour'] = df['tpep_pickup_datetime'].dt.floor('h')
-    
+   
     # Aggregate
     agg_df = df.groupby(['PULocationID', 'pickup_hour']).agg(
         pickup_count=('PULocationID', 'count'),
@@ -21,6 +24,9 @@ def aggregate_hourly(df: pd.DataFrame) -> pd.DataFrame:
         avg_distance=('trip_distance', 'mean')
     ).reset_index()
     
+    # Fill NaN values (zone-hours with no pickups) with 0 for count, and keep NaN for avg features
+    agg_df['pickup_count'] = agg_df['pickup_count'].fillna(0).astype(int)
+
     print(f"Aggregated to {len(agg_df):,} zone-hour samples")
     print(f"Zones: {agg_df['PULocationID'].nunique()}")
     print(f"Hours: {agg_df['pickup_hour'].nunique()}")
