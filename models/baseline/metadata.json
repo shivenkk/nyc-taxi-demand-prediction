@@ -1,0 +1,18 @@
+{
+  "model_name": "Linear Regression Baseline",
+  "model_type": "linear",
+  "best_config": {
+    "model_type": "ridge",
+    "alpha": 1.0,
+    "degree": 2,
+    "train_rmse": 18.351572102182487,
+    "val_rmse": 18.18411334936674,
+    "train_r2": 0.9444651061296832,
+    "val_r2": 0.9460226173914275,
+    "train_mae": 10.820871312114146,
+    "val_mae": 10.407195404682291
+  },
+  "n_features": 21,
+  "train_samples": 25353,
+  "val_samples": 6494
+}
