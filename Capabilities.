@@ -1,0 +1,21 @@
+
+======================================================================
+EVALUATING: LSTMTo
+======================================================================
+
+Loading model...
+ Model loaded from: models/lstm/model.pkl
+
+Loading data...
+  Train: 25,353
+  Val: 6,494
+  Test: 6,662
+
+Preparing features...
+
+Evaluating on all splits...
+  Train - RMSE: 64.50, R²: 0.3139
+  Val   - RMSE: 61.73, R²: 0.3780
+  Test  - RMSE: 57.07, R²: 0.4304
+
+Evaluating peak hours...

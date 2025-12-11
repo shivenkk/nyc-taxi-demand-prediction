@@ -5,6 +5,9 @@ import joblib
 from pathlib import Path
 import matplotlib.pyplot as plt
 import seaborn as sns
+import sys
+sys.path.append('src/models')
+from lstm_utils import LSTMWrapper, LSTMNet
 
 def prepare_features(df: pd.DataFrame) -> tuple:
     """Prepare features and target (same as training)"""
@@ -164,9 +167,7 @@ def evaluate_model(model_path: str, model_name: str = 'Model',
     
     output_dir.mkdir(parents=True, exist_ok=True)
     
-    print(f"\n{'='*70}")
     print(f"EVALUATING: {model_name}")
-    print(f"{'='*70}\n")
     
     # Load model
     print("Loading model...")
@@ -174,17 +175,23 @@ def evaluate_model(model_path: str, model_name: str = 'Model',
     print(f" Model loaded from: {model_path}")
     
     # Load data
-    print("\nLoading data...")
+    print("\nLoading data")
     train_df = pd.read_parquet('data/processed/train.parquet')
     val_df = pd.read_parquet('data/processed/val.parquet')
     test_df = pd.read_parquet('data/processed/test.parquet')
+
+    # Sort for LSTM (needs sequential data)
+    if 'LSTM' in model_name:
+        train_df = train_df.sort_values(['PULocationID', 'pickup_hour']).reset_index(drop=True)
+        val_df = val_df.sort_values(['PULocationID', 'pickup_hour']).reset_index(drop=True)
+        test_df = test_df.sort_values(['PULocationID', 'pickup_hour']).reset_index(drop=True)
     
     print(f"  Train: {len(train_df):,}")
     print(f"  Val: {len(val_df):,}")
     print(f"  Test: {len(test_df):,}")
     
     # Prepare features
-    print("\nPreparing features...")
+    print("\nPreparing features")
     X_train, y_train = prepare_features(train_df)
     X_val, y_val = prepare_features(val_df)
     X_test, y_test = prepare_features(test_df)
@@ -239,9 +246,7 @@ def evaluate_model(model_path: str, model_name: str = 'Model',
     plot_error_distribution(y_test, y_test_pred, 'Test',
                           output_dir / 'error_distribution.png')
     
-    print(f"\n{'='*70}")
-    print("EVALUATION COMPLETE")
-    print(f"{'='*70}")
+    print("EVALUATION FINISHED")
     
     return metrics_df
 
