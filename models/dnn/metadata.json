@@ -1,0 +1,46 @@
+{
+  "model_name": "Deep Neural Network (Feed-Forward)",
+  "model_type": "neural_network",
+  "library": "tensorflow/keras",
+  "best_hyperparameters": {
+    "hidden_layers": "[128, 64, 32]",
+    "dropout_rate": 0.1,
+    "learning_rate": 0.001,
+    "batch_size": 256,
+    "epochs_trained": 100
+  },
+  "performance": {
+    "train_rmse": 17.160886711205915,
+    "val_rmse": 17.545113968564635,
+    "train_r2": 0.9514377117156982,
+    "val_r2": 0.9497495293617249,
+    "train_mae": 9.476239204406738,
+    "val_mae": 9.22835636138916
+  },
+  "training_time_seconds": 100.07106685638428,
+  "n_features": 21,
+  "feature_names": [
+    "avg_fare",
+    "avg_distance",
+    "hour",
+    "day_of_week",
+    "is_weekend",
+    "day_of_month",
+    "is_morning_rush",
+    "is_evening_rush",
+    "is_rush_hour",
+    "lag_1h",
+    "lag_2h",
+    "lag_24h",
+    "lag_168h",
+    "rolling_3h_mean",
+    "rolling_24h_mean",
+    "rolling_3h_std",
+    "rolling_24h_std",
+    "zone_avg_fare",
+    "zone_avg_distance",
+    "zone_avg_demand",
+    "zone_demand_std"
+  ],
+  "scaling": "StandardScaler (mean=0, std=1)"
+}

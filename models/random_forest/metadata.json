@@ -1,0 +1,52 @@
+{
+  "model_name": "Random Forest Regressor",
+  "model_type": "ensemble_tree",
+  "library": "scikit-learn",
+  "best_hyperparameters": {
+    "n_estimators": 200,
+    "max_depth": 25,
+    "min_samples_split": 2,
+    "min_samples_leaf": 1,
+    "max_features": "sqrt"
+  },
+  "performance": {
+    "train_rmse": 6.525493260989209,
+    "val_rmse": 17.174717276143525,
+    "train_r2": 0.9929782382686246,
+    "val_r2": 0.9518488398969993,
+    "train_mae": 3.523275908259733,
+    "val_mae": 8.585190064652847
+  },
+  "training_time_seconds": 3.6139440536499023,
+  "n_features": 21,
+  "feature_names": [
+    "avg_fare",
+    "avg_distance",
+    "hour",
+    "day_of_week",
+    "is_weekend",
+    "day_of_month",
+    "is_morning_rush",
+    "is_evening_rush",
+    "is_rush_hour",
+    "lag_1h",
+    "lag_2h",
+    "lag_24h",
+    "lag_168h",
+    "rolling_3h_mean",
+    "rolling_24h_mean",
+    "rolling_3h_std",
+    "rolling_24h_std",
+    "zone_avg_fare",
+    "zone_avg_distance",
+    "zone_avg_demand",
+    "zone_demand_std"
+  ],
+  "top_5_features": [
+    "lag_1h",
+    "rolling_3h_mean",
+    "lag_24h",
+    "lag_2h",
+    "lag_168h"
+  ]
+}
