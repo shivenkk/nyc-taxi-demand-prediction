@@ -168,9 +168,7 @@ def hyperparameter_search(X_train, y_train, X_val, y_val):
     """
     Search for best DNN architecture and hyperparameters
     """
-    print(f"\n{'='*70}")
     print("HYPERPARAMETER SEARCH - Deep Neural Network")
-    print(f"{'='*70}\n")
     
     results = []
     models = []
@@ -228,12 +226,9 @@ def hyperparameter_search(X_train, y_train, X_val, y_val):
     best_model = models[best_idx]
     best_history = histories[best_idx]
     
-    print(f"\n{'='*70}")
     print("HYPERPARAMETER SEARCH RESULTS")
-    print(f"{'='*70}\n")
     print(results_df.to_string(index=False))
     
-    print(f"\n{'='*70}")
     print(f"BEST MODEL:")
     print(f"  Architecture: {results_df.iloc[best_idx]['hidden_layers']}")
     print(f"  Dropout rate: {results_df.iloc[best_idx]['dropout_rate']}")
@@ -243,7 +238,6 @@ def hyperparameter_search(X_train, y_train, X_val, y_val):
     print(f"  Validation RMSE: {results_df.iloc[best_idx]['val_rmse']:.2f}")
     print(f"  Validation R²: {results_df.iloc[best_idx]['val_r2']:.4f}")
     print(f"  Training time: {results_df.iloc[best_idx]['train_time_seconds']:.1f}s")
-    print(f"{'='*70}\n")
     
     return best_model, best_history, results_df
 
@@ -340,9 +334,7 @@ def save_results(best_model, results_df, scaler, scaler_y, best_history, feature
     plot_training_history(best_history, output_dir)
 
 if __name__ == "__main__":
-    print(f"\n{'='*70}")
     print("DEEP NEURAL NETWORK (FEED-FORWARD) - TRAINING")
-    print(f"{'='*70}\n")
     
     # Check TensorFlow/GPU
     print("TensorFlow Configuration:")
@@ -373,7 +365,7 @@ if __name__ == "__main__":
     # Scale features (CRITICAL for neural networks!)
     print("\nScaling features (StandardScaler)...")
     X_train_scaled, X_val_scaled, scaler = scale_features(X_train, X_val)
-    print(f"  ✓ Features scaled (mean=0, std=1)")
+    print(f" Features scaled (mean=0, std=1)")
     
     y_scaler = StandardScaler()
     y_train_scaled = y_scaler.fit_transform(y_train.values.reshape(-1, 1)).flatten()
@@ -385,18 +377,13 @@ if __name__ == "__main__":
     )
     
     # Save everything
-    print(f"\n{'='*70}")
     print("SAVING RESULTS")
-    print(f"{'='*70}\n")
     
     output_dir = Path('models/dnn')
     save_results(best_model, results_df, scaler, y_scaler, best_history, X_train.columns, output_dir)
     
-    print(f"\n{'='*70}")
-    print("TRAINING COMPLETE ✅")
-    print(f"{'='*70}")
+    print("TRAINING COMPLETE")
     print("\nNext steps:")
     print("  1. Run evaluation: python src/evaluation/evaluate_model.py models/dnn/model.keras \"Deep Neural Network\"")
     print("  2. Run granular evaluation: python src/evaluation/granular_evaluation.py models/dnn/model.keras")
     print("  3. Compare with baseline and Random Forest results")
-    print(f"\n{'='*70}\n")

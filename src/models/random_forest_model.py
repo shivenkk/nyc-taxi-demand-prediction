@@ -88,9 +88,7 @@ def hyperparameter_search_manual(X_train, y_train, X_val, y_val):
     Manual hyperparameter search with focused configurations
     Faster than RandomizedSearchCV for structured search
     """
-    print(f"\n{'='*70}")
     print("HYPERPARAMETER SEARCH - Random Forest")
-    print(f"{'='*70}\n")
     
     results = []
     models = []
@@ -138,12 +136,9 @@ def hyperparameter_search_manual(X_train, y_train, X_val, y_val):
     best_idx = results_df['val_rmse'].idxmin()
     best_model = models[best_idx]
     
-    print(f"\n{'='*70}")
     print("HYPERPARAMETER SEARCH RESULTS")
-    print(f"{'='*70}\n")
     print(results_df.to_string(index=False))
     
-    print(f"\n{'='*70}")
     print(f"BEST MODEL:")
     print(f"  n_estimators: {results_df.iloc[best_idx]['n_estimators']}")
     print(f"  max_depth: {results_df.iloc[best_idx]['max_depth']}")
@@ -152,7 +147,6 @@ def hyperparameter_search_manual(X_train, y_train, X_val, y_val):
     print(f"  Validation RMSE: {results_df.iloc[best_idx]['val_rmse']:.2f}")
     print(f"  Validation R²: {results_df.iloc[best_idx]['val_r2']:.4f}")
     print(f"  Training time: {results_df.iloc[best_idx]['train_time_seconds']:.1f}s")
-    print(f"{'='*70}\n")
     
     return best_model, results_df
 
@@ -182,7 +176,6 @@ def analyze_feature_importance(model, feature_names, output_dir, top_n=20):
     
     # Print top features
     print(f"\nTop {top_n} Most Important Features:")
-    print("-" * 70)
     for i in range(min(top_n, len(importance_df))):
         row = importance_df.iloc[i]
         print(f"  {i+1:2d}. {row['feature']:30s} {row['importance']:.4f} ({row['importance_pct']:.2f}%)")
@@ -279,9 +272,7 @@ def save_results(best_model, results_df, feature_importance_df, X_train, output_
     print(f"✓ Metadata saved to: {output_dir / 'metadata.json'}")
 
 if __name__ == "__main__":
-    print(f"\n{'='*70}")
     print("RANDOM FOREST REGRESSOR - TRAINING")
-    print(f"{'='*70}\n")
     
     # Load data
     print("Loading data splits...")
@@ -305,25 +296,18 @@ if __name__ == "__main__":
     best_model, results_df = hyperparameter_search_manual(X_train, y_train, X_val, y_val)
     
     # Feature importance analysis
-    print(f"\n{'='*70}")
     print("FEATURE IMPORTANCE ANALYSIS")
-    print(f"{'='*70}")
     
     output_dir = Path('models/random_forest')
     importance_df = analyze_feature_importance(best_model, X_train.columns, output_dir, top_n=20)
     
     # Save everything
-    print(f"\n{'='*70}")
     print("SAVING RESULTS")
-    print(f"{'='*70}\n")
     
     save_results(best_model, results_df, importance_df, X_train, output_dir)
     
-    print(f"\n{'='*70}")
-    print("TRAINING COMPLETE ✅")
-    print(f"{'='*70}")
+    print("TRAINING COMPLETE")
     print("\nNext steps:")
     print("  1. Run evaluation: python src/evaluation/evaluate_model.py models/random_forest/model.pkl \"Random Forest\"")
     print("  2. Run granular evaluation: python src/evaluation/granular_evaluation.py models/random_forest/model.pkl")
     print("  3. Compare with baseline results")
-    print(f"\n{'='*70}\n")
