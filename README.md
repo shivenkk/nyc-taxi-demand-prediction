@@ -11,7 +11,12 @@ python -m venv venv
 source venv/bin/activate  # Windows: venv\Scripts\activate
 pip install -r requirements.txt
 ```
-
+Below are individual steps that go over data download and pre-processing, model training and evaluations.
+To run the full pipeline from data download, pre-processing, models training to evaluation, run:
+```
+chmod +x run_pipeline.sh
+./run_pipeline.sh
+```
 ## Data
 
 Download January 2024 Yellow Taxi data:
