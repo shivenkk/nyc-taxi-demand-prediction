@@ -5,6 +5,9 @@ import joblib
 from pathlib import Path
 import matplotlib.pyplot as plt
 import seaborn as sns
+import sys
+sys.path.append('src/models')
+from dnn_model import DNNWrapper, DNNNet
 
 def prepare_features(df: pd.DataFrame) -> tuple:
     """Prepare features and target"""
