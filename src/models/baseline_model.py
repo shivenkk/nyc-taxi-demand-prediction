@@ -75,9 +75,7 @@ def hyperparameter_search(X_train, y_train, X_val, y_val):
     """
     Try different hyperparameters and return best model
     """
-    print(f"\n{'='*70}")
     print("HYPERPARAMETER SEARCH")
-    print(f"{'='*70}\n")
     
     results = []
     models = []
@@ -105,24 +103,18 @@ def hyperparameter_search(X_train, y_train, X_val, y_val):
     best_idx = results_df['val_rmse'].idxmin()
     best_model = models[best_idx]
     
-    print(f"\n{'='*70}")
     print("RESULTS")
-    print(f"{'='*70}\n")
     print(results_df.to_string(index=False))
     
-    print(f"\n{'='*70}")
     print(f"BEST: {results_df.iloc[best_idx]['model_type']} "
           f"(alpha={results_df.iloc[best_idx]['alpha']}, degree={results_df.iloc[best_idx]['degree']})")
     print(f"  Val RMSE: {results_df.iloc[best_idx]['val_rmse']:.2f}")
     print(f"  Val R²: {results_df.iloc[best_idx]['val_r2']:.4f}")
-    print(f"{'='*70}\n")
     
     return best_model, results_df
 
 if __name__ == "__main__":
-    print(f"\n{'='*70}")
     print("LINEAR REGRESSION BASELINE MODEL - TRAINING")
-    print(f"{'='*70}\n")
     
     # Load data
     print("Loading data splits...")
@@ -133,7 +125,7 @@ if __name__ == "__main__":
     print(f"  Val: {len(val_df):,} samples")
     
     # Prepare features
-    print("\nPreparing features...")
+    print("\nPreparing features")
     X_train, y_train = prepare_features(train_df)
     X_val, y_val = prepare_features(val_df)
     
@@ -169,6 +161,4 @@ if __name__ == "__main__":
         json.dump(metadata, f, indent=2)
     print(f"Metadata saved to: {output_dir / 'metadata.json'}")
     
-    print(f"\n{'='*70}")
-    print("BASELINE MODEL TRAINING COMPLETE")
-    print(f"{'='*70}")
+    print("BASELINE MODEL TRAINING DONE")
