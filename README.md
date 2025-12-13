@@ -58,7 +58,9 @@ python src/models/lstm_model.py
 ### 5. Evaluate models
 ```bash
 python src/evaluation/evaluate_model.py models/baseline/model.pkl "Linear Regression"
+python src/evaluation/evaluate_model.py models/random_forest/model.pkl "Random Forest"
 python src/evaluation/evaluate_model.py models/xgboost/model.pkl "XGBoost"
+python src/evaluation/evaluate_model.py models/dnn/model.pkl "DNN"
 python src/evaluation/evaluate_model.py models/lstm/model.pkl "LSTM"
 ```
 
@@ -84,13 +86,13 @@ python src/evaluation/evaluate_model.py models/lstm/model.pkl "LSTM"
 
 ## Results
 
-| Model | Test RMSE | Test R² |
-|-------|-----------|---------|
-| Linear Regression | 17.38 | 0.947 |
-| Random Forest | -- | -- |
-| **XGBoost** | **15.50** | **0.958** |
-| DNN | -- | -- |
-| LSTM | 33.99 | 0.798 |
+| Model | Test RMSE | Test R² | Test MAE |
+|-------|-----------|---------|----------|
+| Linear Regression | 17.38 | 0.947 | 10.18 |
+| Random Forest | 16.32 | 0.953 | 8.26 |
+| DNN | 17.09 | 0.949 | 9.31 |
+| **XGBoost** | **15.50** | **0.958** | **7.96** |
+| LSTM | 33.99 | 0.798 | 14.61 |
 
 ## Requirements
 
